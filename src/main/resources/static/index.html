@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinobilettregistrering</title>
+    <script type="application/javascript" src="app.js"></script>
+</head>
+<body>
+    <h1>Kinobilettregistrering</h1>
+
+    <label for="filmer">Velg film: </label>
+    <select id="filmer">
+        <option>Velg film</option>
+        <option>Titanic</option>
+        <option>Forest Gump</option>
+    </select>
+    <br>
+    <br>
+
+    <label for="antallBiletter">Antall billetter</label>
+    <input type="text" id="antallBiletter" required>
+    <span id="feilAntall" style="color: red"></span>
+    <br>
+    <br>
+    <br>
+    <label for="fornavn">Fornavn</label>
+    <input type="text" id="fornavn" required>
+    <span id="feilFornavn" style="color: red"></span>
+    <br>
+    <br>
+    <br>
+    <label for="etternavn">Etternavn</label>
+    <input type="text" id="etternavn" required>
+    <span id="feilEtternavn" style="color: red"></span>
+    <br>
+    <br>
+    <br>
+    <label for="telefonNr">TelefonNr</label>
+    <input type="text" id="telefonNr" required>
+    <span id="feilTelefonNr" style="color: red"></span>
+    <br>
+    <br>
+    <br>
+    <label for="epost">Epost</label>
+    <input type="text" id="epost" required>
+    <span id="feilEpost" style="color: red"></span>
+    <br>
+    <br>
+    <br>
+
+    <button type="button" onclick="kjop()">Kjøp billett</button>
+    <br>
+    <br>
+    <h2>Alle biletter</h2>
+    <!-- <ul id="kjopteBiletter"></ul> -->
+
+    <br>
+    <br>
+    <button onclick="slettAlleBiletter()">Slett alle biletter</button>
+
+
+</body>
+</html>
