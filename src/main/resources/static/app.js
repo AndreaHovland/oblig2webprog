@@ -1,84 +1,53 @@
-// Array for å lagre kjøpte billetter
-let billetter = [];
+let tickets = [];
 
-// Funksjon for å kjøpe billetter
-function kjop() {
-    console.log("fungerer");
-    // Hent verdier fra input-feltene
-    let film = document.getElementById("filmer").value;
-    let antallBilletter = document.getElementById("antallBiletter").value;
-    let fornavn = document.getElementById("fornavn").value;
-    let etternavn = document.getElementById("etternavn").value;
-    let telefonNr = document.getElementById("telefonNr").value;
-    let epost = document.getElementById("epost").value;
+function buyTicket() {
+    const movieName = document.getElementById('movieName').value;
+    const numTickets = parseInt(document.getElementById('numTickets').value);
+    const customerName = document.getElementById('customerName').value;
+    const customerEmail = document.getElementById('customerEmail').value;
+    const customerPhone = document.getElementById('customerPhone').value;
 
-    // Regex validering på telefonnr (8 siffer)
-    const telefonRegex = /^\d{8}$/;
-
-    //Regex validering på epost
-    const epostRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    // Validering av input-feltene
-    if (film === "Velg film" || antallBilletter === "" || fornavn === "" || etternavn === "" || telefonNr === "" || epost === "") {
-        alert("Vennligst fyll ut alle feltene.");
-        return;
-    }
-    if (!telefonRegex.test(telefonNr)) {
-        alert("Vennligst skriv inn et gyldig telefonnummer med 8 sifre.");
+    if (!validateInputs(movieName, numTickets, customerName, customerEmail, customerPhone)) {
         return;
     }
 
-    if (!epostRegex.test(epost)) {
-        alert("Vennligst skriv inn en gyldig e-postadresse.");
-        return;
-    }
+    const ticket = {
+        movieName: movieName,
+        numTickets: numTickets,
+        customerName: customerName,
+        customerEmail: customerEmail,
+        customerPhone: customerPhone
+    };
 
-    // Legg til billetten i billetter-arrayet
-    billetter.push({
-        film: film,
-        antallBilletter: antallBilletter,
-        fornavn: fornavn,
-        etternavn: etternavn,
-        telefonNr: telefonNr,
-        epost: epost
+    tickets.push(ticket);
+    displayTickets();
+    clearInputs();
+}
+
+function validateInputs(movieName, numTickets, customerName, customerEmail, customerPhone) {
+    // Implement custom validation for each input type
+    // For example, validate email format, phone number format, etc.
+}
+
+function displayTickets() {
+    const ticketList = document.getElementById('ticketList');
+    ticketList.innerHTML = '';
+    tickets.forEach(ticket => {
+        const li = document.createElement('li');
+        li.textContent = `${ticket.numTickets} billetter for "${ticket.movieName}" - ${ticket.customerName}, ${ticket.customerEmail}, ${ticket.customerPhone}`;
+        ticketList.appendChild(li);
     });
-
-    // Oppdater visningen av billetter
-    visKjopteBilletter();
 }
 
-//funksjon for å vise kjøpte billetter
-function visKjopteBilletter() {
-    let billettListe = document.getElementById("kjopteBiletter");
-    billettListe.innerHTML = "";
-    let htmlListe = "";
-    for (let i = 0; i < billetter.length; i++) {
-        let billett = billetter[i];
-        htmlListe += `<li>Film: ${billett.film}, Antall: ${billett.antallBilletter}, Fornavn: ${billett.fornavn}, Etternavn:
-            ${billett.etternavn}, TelefonNr: ${billett.telefonNr}, Epost: ${billett.epost}</li>`;
-    }
-    billettListe.innerHTML = htmlListe;
+function clearInputs() {
+    document.getElementById('movieName').value = '';
+    document.getElementById('numTickets').value = '';
+    document.getElementById('customerName').value = '';
+    document.getElementById('customerEmail').value = '';
+    document.getElementById('customerPhone').value = '';
 }
 
-// funksjon for å skrive ut billetter
-function skrivUt() {
-    let ut = "";
-    for (let i = 0; i < billetter.length; i++) {
-        ut += billetter[i].film + "<br>" + billetter[i].antallBilletter + "<br>" + billetter[i].fornavn + " " + billetter[i].etternavn + "<br>" + billetter[i].telefonNr + "<br>" + billetter[i].epost + "<br>";
-    }
-    document.getElementById("utskrift").innerHTML = ut;
+function deleteAllTickets() {
+    tickets = [];
+    displayTickets();
 }
-
-// funksjon for å slette alle billetter
-function slettAlleBilletter() {
-    billetter = [];
-    visKjopteBilletter();
-}
-
-// Tøm inputfeltene
-document.getElementById('filmer').value = "";
-document.getElementById('antallBiletter').value = "";
-document.getElementById('fornavn').value = "";
-document.getElementById('etternavn').value = "";
-document.getElementById('telefonNr').value = "";
-document.getElementById('epost').value = "";
